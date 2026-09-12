@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>HeartCare | Heart Disease Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<div class="dashboard">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                ♥
+            </div>
+
+            <div>
+
+                <h2>HeartCare</h2>
+
+                <span>
+                    AI Health Dashboard
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-line"></div>
+
+
+        <div class="nav-item active">
+
+            <span class="nav-icon">⌂</span>
+
+            <span>
+                Heart Prediction
+            </span>
+
+        </div>
+
+
+        <div class="nav-item">
+
+            <span class="nav-icon">◉</span>
+
+            <span>
+                KNN Analysis
+            </span>
+
+        </div>
+
+
+        <div class="nav-item">
+
+            <span class="nav-icon">▣</span>
+
+            <span>
+                Patient Data
+            </span>
+
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="model-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>AI Model Online</strong>
+
+                    <small>
+                        KNN Classifier
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =================================================
+             TOP BAR
+        ================================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="welcome">
+                    WELCOME BACK
+                </p>
+
+                <h1>
+                    Heart Health Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="online-badge">
+
+                <span class="status-dot"></span>
+
+                AI Model Online
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             HERO SECTION
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-tag">
+                    ♥ MACHINE LEARNING
+                </div>
+
+                <h2>
+                    Intelligent Heart
+                    <span>Risk Prediction</span>
+                </h2>
+
+                <p>
+                    Analyze clinical parameters using an
+                    optimized K-Nearest Neighbors machine
+                    learning model.
+                </p>
+
+            </div>
+
+
+            <div class="hero-heart">
+
+                <div class="pulse-ring"></div>
+
+                <div class="heart-symbol">
+                    ♥
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STAT CARDS
+        ================================================== -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <span>MODEL</span>
+
+                    <strong>KNN Classifier</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    # 
+                </div>
+
+                <div>
+
+                    <span>NEIGHBORS</span>
+
+                    <strong>12</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ↗
+                </div>
+
+                <div>
+
+                    <span>METRIC</span>
+
+                    <strong>Euclidean</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ◆
+                </div>
+
+                <div>
+
+                    <span>WEIGHTS</span>
+
+                    <strong>Distance</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAIN GRID
+        ================================================== -->
+
+        <section class="prediction-layout">
+
+
+            <!-- =============================================
+                 INPUT CARD
+            ============================================== -->
+
+            <div class="input-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="section-label">
+                            PATIENT INFORMATION
+                        </p>
+
+                        <h2>
+                            Clinical Parameters
+                        </h2>
+
+                    </div>
+
+                    <div class="parameter-count">
+                        13
+                    </div>
+
+                </div>
+
+
+                <form method="POST">
+
+
+                    <!-- =====================================
+                         ROW 1
+                    ====================================== -->
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Age
+                            </label>
+
+                            <input
+                                type="number"
+                                name="age"
+                                placeholder="e.g. 55"
+                                min="1"
+                                max="120"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Sex
+                            </label>
+
+                            <select name="sex" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    Female
+                                </option>
+
+                                <option value="1">
+                                    Male
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 2
+                        ================================== -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Chest Pain Type
+                            </label>
+
+                            <select name="cp" required>
+
+                                <option value="">
+                                    Select type
+                                </option>
+
+                                <option value="0">
+                                    Typical Angina
+                                </option>
+
+                                <option value="1">
+                                    Atypical Angina
+                                </option>
+
+                                <option value="2">
+                                    Non-anginal Pain
+                                </option>
+
+                                <option value="3">
+                                    Asymptomatic
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Resting Blood Pressure
+                            </label>
+
+                            <input
+                                type="number"
+                                name="trestbps"
+                                placeholder="mm Hg"
+                                min="50"
+                                max="250"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 3
+                        ================================== -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Cholesterol
+                            </label>
+
+                            <input
+                                type="number"
+                                name="chol"
+                                placeholder="mg/dl"
+                                min="50"
+                                max="700"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Fasting Blood Sugar
+                            </label>
+
+                            <select name="fbs" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    ≤ 120 mg/dl
+                                </option>
+
+                                <option value="1">
+                                    > 120 mg/dl
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 4
+                        ================================== -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Resting ECG
+                            </label>
+
+                            <select name="restecg" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    Normal
+                                </option>
+
+                                <option value="1">
+                                    ST-T Wave Abnormality
+                                </option>
+
+                                <option value="2">
+                                    Left Ventricular Hypertrophy
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Maximum Heart Rate
+                            </label>
+
+                            <input
+                                type="number"
+                                name="thalach"
+                                placeholder="e.g. 150"
+                                min="50"
+                                max="250"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 5
+                        ================================== -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Exercise Induced Angina
+                            </label>
+
+                            <select name="exang" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    No
+                                </option>
+
+                                <option value="1">
+                                    Yes
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                ST Depression (Oldpeak)
+                            </label>
+
+                            <input
+                                type="number"
+                                name="oldpeak"
+                                placeholder="e.g. 1.2"
+                                step="0.1"
+                                min="0"
+                                max="10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 6
+                        ================================== -->
+
+                        <div class="form-group">
+
+                            <label>
+                                ST Segment Slope
+                            </label>
+
+                            <select name="slope" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    Upsloping
+                                </option>
+
+                                <option value="1">
+                                    Flat
+                                </option>
+
+                                <option value="2">
+                                    Downsloping
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Major Vessels (CA)
+                            </label>
+
+                            <select name="ca" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="0">
+                                    0 Vessels
+                                </option>
+
+                                <option value="1">
+                                    1 Vessel
+                                </option>
+
+                                <option value="2">
+                                    2 Vessels
+                                </option>
+
+                                <option value="3">
+                                    3 Vessels
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- =================================
+                             ROW 7
+                        ================================== -->
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Thalassemia
+                            </label>
+
+                            <select name="thal" required>
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="1">
+                                    Normal
+                                </option>
+
+                                <option value="2">
+                                    Fixed Defect
+                                </option>
+
+                                <option value="3">
+                                    Reversible Defect
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================================
+                         SUBMIT
+                    ====================================== -->
+
+                    <button
+                        type="submit"
+                        class="predict-button"
+                    >
+
+                        <span>
+                            ♥
+                        </span>
+
+                        Analyze Heart Risk
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <p class="form-note">
+                        This prediction is generated by a
+                        machine learning model and is intended
+                        for educational purposes only.
+                    </p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 RESULT CARD
+            ============================================== -->
+
+            <div class="result-card">
+
+
+                <div class="result-label">
+                    PREDICTION RESULT
+                </div>
+
+
+                <!-- =========================================
+                     BEFORE PREDICTION
+                ========================================== -->
+
+                {% if prediction is none %}
+
+                    <div class="result-empty">
+
+                        <div class="result-icon neutral">
+                            ♥
+                        </div>
+
+                        <h2>
+                            Awaiting Prediction
+                        </h2>
+
+                        <p>
+                            Enter the clinical parameters
+                            and click
+                            <strong>
+                                Analyze Heart Risk
+                            </strong>
+                            to generate a prediction.
+                        </p>
+
+                    </div>
+
+
+                <!-- =========================================
+                     ERROR
+                ========================================== -->
+
+                {% elif prediction.startswith("Error") %}
+
+                    <div class="result-empty error-result">
+
+                        <div class="result-icon">
+                            !
+                        </div>
+
+                        <h2>
+                            Prediction Error
+                        </h2>
+
+                        <p>
+                            {{ prediction }}
+                        </p>
+
+                    </div>
+
+
+                <!-- =========================================
+                     HEART DISEASE
+                ========================================== -->
+
+                {% elif predicted_class == 1 %}
+
+                    <div class="result-positive">
+
+                        <div class="result-icon danger">
+                            !
+                        </div>
+
+                        <h2>
+                            Heart Disease Detected
+                        </h2>
+
+                        <p>
+                            The KNN model predicts a positive
+                            heart disease result.
+                        </p>
+
+
+                        <!-- Probability -->
+
+                        <div class="probability-main">
+
+                            <span>
+                                Disease Probability
+                            </span>
+
+                            <strong>
+                                {{ disease_probability }}%
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Secondary probability -->
+
+                        <div class="probability-secondary">
+
+                            <div>
+
+                                <span>
+                                    Disease
+                                </span>
+
+                                <strong>
+                                    {{ disease_probability }}%
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    No Disease
+                                </span>
+
+                                <strong>
+                                    {{ no_disease_probability }}%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Predicted class -->
+
+                        <div class="prediction-badge danger-badge">
+
+                            <span>
+                                MODEL PREDICTION
+                            </span>
+
+                            <strong>
+                                100% DISEASE
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                <!-- =========================================
+                     NO HEART DISEASE
+                ========================================== -->
+
+                {% else %}
+
+                    <div class="result-negative">
+
+                        <div class="result-icon success">
+                            ✓
+                        </div>
+
+                        <h2>
+                            No Heart Disease Detected
+                        </h2>
+
+                        <p>
+                            The KNN model predicts a negative
+                            heart disease result.
+                        </p>
+
+
+                        <!-- Probability -->
+
+                        <div class="probability-main">
+
+                            <span>
+                                No Disease Probability
+                            </span>
+
+                            <strong>
+                                {{ no_disease_probability }}%
+                            </strong>
+
+                        </div>
+
+
+                        <!-- Secondary probability -->
+
+                        <div class="probability-secondary">
+
+                            <div>
+
+                                <span>
+                                    No Disease
+                                </span>
+
+                                <strong>
+                                    {{ no_disease_probability }}%
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Disease
+                                </span>
+
+                                <strong>
+                                    {{ disease_probability }}%
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Predicted class -->
+
+                        <div class="prediction-badge success-badge">
+
+                            <span>
+                                MODEL PREDICTION
+                            </span>
+
+                            <strong>
+                                100% NO DISEASE
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- =========================================
+                     MODEL INFORMATION
+                ========================================== -->
+
+                <div class="model-info">
+
+                    <div class="model-info-title">
+                        MODEL INFORMATION
+                    </div>
+
+
+                    <div class="model-info-grid">
+
+                        <div>
+
+                            <span>
+                                MODEL
+                            </span>
+
+                            <strong>
+                                KNN Classifier
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                NEIGHBORS
+                            </span>
+
+                            <strong>
+                                12
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                METRIC
+                            </span>
+
+                            <strong>
+                                Euclidean
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                WEIGHTS
+                            </span>
+
+                            <strong>
+                                Distance
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <span>
+                HeartCare AI
+            </span>
+
+            <span>
+                •
+            </span>
+
+            <span>
+                Machine Learning Health Prediction
+            </span>
+
+            <span>
+                •
+            </span>
+
+            <span>
+                Educational Project
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
